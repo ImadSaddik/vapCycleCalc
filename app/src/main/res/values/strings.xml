@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">vapCycleCalc</string>
+    <string name="select">Select a component</string>
+    <string name="operations">Select an operation</string>
+    <string name="canvas">Canvas</string>
+    <string name="icon_add">Add a component</string>
+    <string name="icon_duplicate">Duplicate a component</string>
+    <string name="icon_remove">Remove a component</string>
+    <string name="icon_confirm">Confirm</string>
+    <string name="icon_settings">Settings</string>
+    <string name="turbine">Turbine</string>
+    <string name="pump">Pump</string>
+    <string name="condenser">Condenser</string>
+    <string name="boiler">Boiler</string>
+    <string name="input">In</string>
+    <string name="output">Out</string>
+    <string name="properties">Properties</string>
+    <string name="hint_name">Name of the component</string>
+    <string name="hint_input">Input</string>
+    <string name="hint_output">Output</string>
+    <string name="hint_efficiency">Isentropic efficiency</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="boiler_name">B1</string>
+    <string name="condenser_name">C1</string>
+    <string name="turbine_name">T1</string>
+    <string name="pump_name">P1</string>
+</resources>
