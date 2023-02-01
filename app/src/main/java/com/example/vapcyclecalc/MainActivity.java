@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
         ComponentDialog.componentDialogListener {
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private RightBox rightBox;
     private LeftBox leftBox;
     private boolean isVisible = false;
+    private boolean firstTouch = true;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -43,17 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             removeSelection();
         }
         lastViewTouched = v;
-        doubleTapEvent();
+        tapEvents();
         gd.onTouchEvent(event);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                if (firstTouch) {
+                    showBordersFirstTouch();
+                }
                 dX = v.getX() - event.getRawX();
                 dY = v.getY() - event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isViewInside(canvasRelLay, (int) event.getRawX(), (int) event.getRawY())) {
-                    showBorders();
                     v.animate()
                             .x(event.getRawX() + dX)
                             .y(event.getRawY() + dY)
@@ -67,7 +69,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
-    private void showBorders() {
+    private void showBordersFirstTouch() {
+        leftBox = lastViewTouched.findViewById(R.id.leftSelection);
+        rightBox = lastViewTouched.findViewById(R.id.rightSelection);
+
+        leftBox.setVisibility(View.VISIBLE);
+        rightBox.setVisibility(View.VISIBLE);
+
+        firstTouch = false;
+    }
+
+    private void showRemoveBorders() {
         leftBox = lastViewTouched.findViewById(R.id.leftSelection);
         rightBox = lastViewTouched.findViewById(R.id.rightSelection);
 
@@ -75,10 +87,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             leftBox.setVisibility(View.GONE);
             rightBox.setVisibility(View.GONE);
             isVisible = false;
+            firstTouch = true;
         } else {
             leftBox.setVisibility(View.VISIBLE);
             rightBox.setVisibility(View.VISIBLE);
             isVisible = true;
+            firstTouch = false;
         }
 
     }
@@ -101,8 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 lastViewTouched = null;
             }
             isVisible = false;
+            firstTouch = true;
         });
-        duplicateBtn.setOnClickListener(v -> duplicateView());
+        duplicateBtn.setOnClickListener(v -> {
+            duplicateView();
+            firstTouch = false;
+        });
         settingsBtn.setOnClickListener(v -> {
             // TODO : Complete the settings operation
         });
@@ -116,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         if (lastViewTouched != null) {
             int id = lastViewTouched.getId();
+            removeSelection();
 
             if (id >= 100 && id < 200) {
                 aView = getLayoutInflater().inflate(R.layout.boiler_layout, null, false);
@@ -135,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             if (aView != null) {
                 aView.setOnTouchListener(this);
                 addComponent(aView);
+                lastViewTouched = aView;
+                showRemoveBorders();
             }
         }
     }
@@ -179,13 +200,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             rightBox.setVisibility(View.GONE);
         }
         isVisible = false;
+        firstTouch = true;
     }
 
-    private void doubleTapEvent() {
+    private void tapEvents() {
         gd.setOnDoubleTapListener(new GestureDetector.OnDoubleTapListener() {
             @Override
             public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
-                showBorders();
+                showRemoveBorders();
                 return false;
             }
 
