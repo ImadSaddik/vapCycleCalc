@@ -50,7 +50,7 @@
         android:id="@+id/componentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="60dp"
         android:fontFamily="@font/roboto_condensed_bold"
         android:text="@string/boiler_name"

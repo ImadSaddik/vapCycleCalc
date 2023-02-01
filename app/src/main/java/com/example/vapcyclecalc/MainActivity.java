@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        /* TODO: When a component is selected, draw a contour around it to show that it is selected
-                but if we type somewhere else the component should be deselected
-         */
-
         if (v != lastViewTouched) {
             removeSelection();
         }

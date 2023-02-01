@@ -61,10 +61,22 @@ public class ComponentDialog extends AppCompatDialogFragment {
         View v = inflater.inflate(R.layout.properties_dialog, null);
 
         initViews(v);
+        setProperties(lastViewTouched);
         setDialog(v);
         onClickListeners();
 
         return dialog;
+    }
+
+    private void setProperties(View v) {
+        TextView nameComponent = v.findViewById(R.id.componentName);
+        name.setText(nameComponent.getText().toString());
+
+        TextView inputComponent = v.findViewById(R.id.inputTxtView);
+        input.setText(inputComponent.getText().toString());
+
+        TextView outputComponent = v.findViewById(R.id.outputTxtView);
+        output.setText(outputComponent.getText().toString());
     }
 
     private void onClickListeners() {
