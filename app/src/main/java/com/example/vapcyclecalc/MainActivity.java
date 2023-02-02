@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     @Override
-    public void getProperties(String name, String input, String output, String efficiency) {
+    public void getProperties(String name, String input, String output) {
         TextView inputTxtView = lastViewTouched.findViewById(R.id.inputTxtView);
         inputTxtView.setText(input);
 

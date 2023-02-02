@@ -16,6 +16,7 @@
     <string name="output">Out</string>
     <string name="properties">Properties</string>
     <string name="hint_name">Name of the component</string>
+    <string name="hint_mass">Mass</string>
     <string name="hint_input">Input</string>
     <string name="hint_output">Output</string>
     <string name="hint_efficiency">Isentropic efficiency</string>

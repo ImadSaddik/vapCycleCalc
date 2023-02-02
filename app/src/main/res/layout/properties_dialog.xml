@@ -54,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInputEditTxtInput"
@@ -71,7 +72,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInputEditTxtOutput"
@@ -84,49 +86,30 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayEfficiency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtInputEditTxtEfficiency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:hint="@string/hint_efficiency"
-            android:inputType="numberDecimal"
-            android:textColor="?attr/colorOnSecondary" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/okBtnDialog"
         style="@style/Widget.App.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:text="@string/ok_button"
         android:textAllCaps="true"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayEfficiency" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <Button
         android:id="@+id/cancelBtnDialog"
         style="@style/Widget.App.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:text="@string/cancel_button"
         android:textAllCaps="true"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/okBtnDialog"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayEfficiency" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,8 +22,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Locale;
 
 public class ComponentDialog extends AppCompatDialogFragment {
-    private TextInputEditText name, input, output, efficiency;
-    private TextInputLayout nameLay, inputLay, outputLay, efficiencyLay;
+    private TextInputEditText name, input, output;
+    private TextInputLayout nameLay, inputLay, outputLay;
     private Button okBtn, cancelBtn;
     private Dialog dialog;
     private componentDialogListener componentDialogListener;
@@ -32,7 +32,6 @@ public class ComponentDialog extends AppCompatDialogFragment {
 
     String inOutMsg = "Type a number";
     String nameMsg = "Choose a name!";
-    String efficiencyMsg = "Type a number between 0 and 1";
 
     public void setLastViewTouched(View lastViewTouched) {
         this.lastViewTouched = lastViewTouched;
@@ -85,9 +84,8 @@ public class ComponentDialog extends AppCompatDialogFragment {
                 String nameStr = name.getText().toString();
                 String inStr = input.getText().toString();
                 String outStr = output.getText().toString();
-                String efficiencyStr = efficiency.getText().toString();
 
-                componentDialogListener.getProperties(nameStr, inStr, outStr, efficiencyStr);
+                componentDialogListener.getProperties(nameStr, inStr, outStr);
                 dialog.dismiss();
             }
         });
@@ -98,29 +96,23 @@ public class ComponentDialog extends AppCompatDialogFragment {
     }
 
     private boolean isValid() {
-        boolean nameBool, inBool, outBool, efficiencyBool;
+        boolean nameBool, inBool, outBool;
 
-        efficiencyBool = efficiencyValidation();
         nameBool = nameValidation();
         inBool = inputValidation();
         outBool = outputValidation();
 
-        showError(nameBool, inBool, outBool, efficiencyBool);
-        return !nameBool && !inBool && !outBool && !efficiencyBool;
-    }
-
-    private boolean efficiencyValidation() {
-        if (efficiency.getText().toString().equals("")) {
-            return true;
-        }
-
-        String str = efficiency.getText().toString();
-        return (Float.parseFloat(str) < 0 || Float.parseFloat(str) > 1);
+        showError(nameBool, inBool, outBool);
+        return !nameBool && !inBool && !outBool;
     }
 
     private boolean inputValidation() {
         if (input.getText().toString().equals("")) {
             inOutMsg = "Type a number";
+            return true;
+        }
+        if (input.getText().toString().equalsIgnoreCase("IN")) {
+            inOutMsg = "Replace this field with a number";
             return true;
         }
         if (input.getText().toString().equals(output.getText().toString())) {
@@ -151,7 +143,10 @@ public class ComponentDialog extends AppCompatDialogFragment {
             inOutMsg = "Type a number";
             return true;
         }
-
+        if (output.getText().toString().equalsIgnoreCase("OUT")) {
+            inOutMsg = "Replace this field with a number";
+            return true;
+        }
         if (input.getText().toString().equals(output.getText().toString())) {
             inOutMsg = "Input and output have the same number";
             return true;
@@ -195,7 +190,7 @@ public class ComponentDialog extends AppCompatDialogFragment {
         return counter != 0;
     }
 
-    private void showError(boolean nameBool, boolean inBool, boolean outBool, boolean efficiencyBool) {
+    private void showError(boolean nameBool, boolean inBool, boolean outBool) {
         if (nameBool) {
             nameLay.setError(nameMsg);
             nameLay.setErrorEnabled(true);
@@ -216,13 +211,6 @@ public class ComponentDialog extends AppCompatDialogFragment {
         } else {
             outputLay.setErrorEnabled(false);
         }
-
-        if (efficiencyBool) {
-            efficiencyLay.setError(efficiencyMsg);
-            efficiencyLay.setErrorEnabled(true);
-        } else {
-            efficiencyLay.setErrorEnabled(false);
-        }
     }
 
     private void setDialog(View v) {
@@ -239,16 +227,14 @@ public class ComponentDialog extends AppCompatDialogFragment {
         name = view.findViewById(R.id.txtInputEditTxtName);
         input = view.findViewById(R.id.txtInputEditTxtInput);
         output = view.findViewById(R.id.txtInputEditTxtOutput);
-        efficiency = view.findViewById(R.id.txtInputEditTxtEfficiency);
         nameLay = view.findViewById(R.id.textInputLayoutName);
         inputLay = view.findViewById(R.id.textInputLayInput);
         outputLay = view.findViewById(R.id.textInputLayOutput);
-        efficiencyLay = view.findViewById(R.id.textInputLayEfficiency);
         okBtn = view.findViewById(R.id.okBtnDialog);
         cancelBtn = view.findViewById(R.id.cancelBtnDialog);
     }
 
     public interface componentDialogListener {
-        void getProperties(String name, String input, String output, String efficiency);
+        void getProperties(String name, String input, String output);
     }
 }
