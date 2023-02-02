@@ -55,7 +55,6 @@ public class ComponentDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        // TODO: customize the layout based on the component
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.properties_dialog, null);
 

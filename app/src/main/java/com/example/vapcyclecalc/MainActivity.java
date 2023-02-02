@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
         ComponentDialog.componentDialogListener {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private LeftBox leftBox;
     private boolean isVisible = false;
     private boolean firstTouch = true;
+    private String confirmErrorDialog = "Make sure that the cycle is correct";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -121,8 +124,110 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             // TODO : Complete the settings operation
         });
         confirmBtn.setOnClickListener(v -> {
-            // TODO : Complete the confirm operation
+            if (confirmCycle()) {
+                Intent intent = new Intent(MainActivity.this, DataInput.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, confirmErrorDialog, Toast.LENGTH_SHORT).show();
+            }
         });
+    }
+
+    private boolean confirmCycle() {
+        if (canvasRelLay.getChildCount() < 4) {
+            confirmErrorDialog = "Add more components in order to complete the cycle!";
+            return false;
+        }
+        if (canvasRelLay.getChildCount() > 4) {
+            confirmErrorDialog = "Remove some component!";
+            return false;
+        }
+        /*
+        Checking if the necessary components are placed.
+        First index : Boiler
+        Second index : Condenser
+        Third index : Turbine
+        Fourth index : Pump
+         */
+        boolean[] componentsPlaced = {false, false, false, false};
+        for (int i = 0; i < canvasRelLay.getChildCount(); i++) {
+            int id = canvasRelLay.getChildAt(i).getId();
+            typeOfComponentInCanvas(id, componentsPlaced);
+        }
+        for (boolean b : componentsPlaced) {
+            confirmErrorDialog = "You need to place all the necessary components!";
+            if (!b) return false;
+        }
+        // Test if the inputs and outputs are correctly entered
+        if (!inputOutputTest()) {
+            confirmErrorDialog = "The inputs and outputs aren't correctly defined!";
+            return false;
+        }
+        return true;
+    }
+
+    private boolean inputOutputTest() {
+        View boilerView = null, condenserView = null, turbineView = null, pumpView = null;
+
+        // Getting the components from the canvas
+        for (int i = 0; i < canvasRelLay.getChildCount(); i++) {
+            int id = canvasRelLay.getChildAt(i).getId();
+
+            if (id >= 100 && id < 200) {
+                boilerView = canvasRelLay.getChildAt(i);
+            } else if (id >= 200 && id < 300) {
+                condenserView = canvasRelLay.getChildAt(i);
+            } else if (id >= 300 && id < 400) {
+                turbineView = canvasRelLay.getChildAt(i);
+            } else if (id >= 400 && id < 500) {
+                pumpView = canvasRelLay.getChildAt(i);
+            }
+        }
+        // Checking if the order of inputs & outputs is correct
+        return boilerPumpCheck(boilerView, pumpView)
+                && boilerTurbineCheck(boilerView, turbineView)
+                && turbineCondenserCheck(turbineView, condenserView)
+                && condenserPumpCheck(condenserView, pumpView);
+    }
+
+    private boolean condenserPumpCheck(View condenserView, View pumpView) {
+        TextView pumpIn = pumpView.findViewById(R.id.inputTxtView);
+        TextView condenserOut = condenserView.findViewById(R.id.outputTxtView);
+
+        return pumpIn.getText().toString().equals(condenserOut.getText().toString());
+    }
+
+    private boolean turbineCondenserCheck(View turbineView, View condenserView) {
+        TextView condenserIn = condenserView.findViewById(R.id.inputTxtView);
+        TextView turbineOut = turbineView.findViewById(R.id.outputTxtView);
+
+        return condenserIn.getText().toString().equals(turbineOut.getText().toString());
+    }
+
+    private boolean boilerTurbineCheck(View boilerView, View turbineView) {
+        TextView turbineIn = turbineView.findViewById(R.id.inputTxtView);
+        TextView boilerOut = boilerView.findViewById(R.id.outputTxtView);
+
+        return turbineIn.getText().toString().equals(boilerOut.getText().toString());
+    }
+
+    private boolean boilerPumpCheck(View boilerView, View pumpView) {
+        TextView boilerIn = boilerView.findViewById(R.id.inputTxtView);
+        TextView pumpOut = pumpView.findViewById(R.id.outputTxtView);
+
+        return boilerIn.getText().toString().equals(pumpOut.getText().toString());
+    }
+
+    private void typeOfComponentInCanvas(int id, boolean[] componentsPlaced) {
+        if (id >= 100 && id < 200) {
+            componentsPlaced[0] = true;
+        } else if (id >= 200 && id < 300) {
+            componentsPlaced[1] = true;
+        } else if (id >= 300 && id < 400) {
+            componentsPlaced[2] = true;
+        } else if (id >= 400 && id < 500) {
+            componentsPlaced[3] = true;
+        }
     }
 
     private void duplicateView() {
@@ -209,7 +314,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             @Override
             public boolean onDoubleTap(@NonNull MotionEvent e) {
-                // TODO: Display the properties in the dialogue after typing a component
                 openDialog();
                 return false;
             }
