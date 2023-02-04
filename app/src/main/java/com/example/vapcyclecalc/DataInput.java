@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -96,13 +97,14 @@ public class DataInput extends AppCompatActivity {
     }
 
     private void setEnthalpyThreeFourValue() {
-        String s = String.valueOf(Math.round(enthalpyL * 100.0) / 100.0);
-        enthalpyValue3.setText(s);
+        float h3 = (float) (Math.round(enthalpyL * 100.0) / 100.0);
+        enthalpyValue3.setText(String.valueOf(h3));
 
         float boilerPress = Float.parseFloat(boilerPressEditTxt.getText().toString());
-        float h4 = enthalpyL + (boilerPress - pressure) * specificVolumeL;
-        s = String.valueOf(Math.round(h4 * 100.0) / 100.0);
-        enthalpyValue4.setText(s);
+        float h4_isentropic = h3 + (boilerPress - pressure) * specificVolumeL * 0.1f;
+        float pumpEff = Float.parseFloat(pumpEffEditText.getText().toString());
+        float h4 = ((h4_isentropic - h3) / pumpEff) + h3;
+        enthalpyValue4.setText(String.valueOf(Math.round(h4 * 100.0) / 100.0));
     }
 
     private void setEnthalpyTwoValue() {
@@ -224,7 +226,10 @@ public class DataInput extends AppCompatActivity {
 
     private void setEnthalpyOneValue() {
         for (SuperheatedWaterVapor obj : TablesDB.superheatedWaterVaporList) {
-            if (obj.getTemperature() == Float.parseFloat(boilerTempEditTxt.getText().toString())) {
+            float temp = Float.parseFloat(boilerTempEditTxt.getText().toString());
+            float press = Float.parseFloat(boilerPressEditTxt.getText().toString());
+
+            if (obj.getTemperature() == temp && obj.getPressure() == press) {
                 String s = String.valueOf(Math.round(obj.getEnthalpy() * 100.0) / 100.0);
                 enthalpyValue1.setText(s);
                 entropy1 = obj.getEntropy();
