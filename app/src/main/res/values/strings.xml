@@ -26,4 +26,20 @@
     <string name="condenser_name">C1</string>
     <string name="turbine_name">T1</string>
     <string name="pump_name">P1</string>
+    <string name="properties_result">Additional information and results</string>
+    <string name="temperature_hint">Temperature value</string>
+    <string name="pressure_hint">Pressure value</string>
+    <string name="temperature_pressure_hint">Temperature or pressure value</string>
+    <string name="condenser_drop_down_menu">T/P</string>
+    <string name="turbine_pump_efficiency">Efficiency</string>
+    <string name="turbine_output">Output in kW</string>
+    <string name="calculate">Calculate</string>
+    <string name="enthalpy_example">h1</string>
+    <string name="enthalpy_unit_example">2758 kJ/kg</string>
+    <string name="sampleText">Sample text</string>
+
+    <array name="condenser_array">
+        <item>T</item>
+        <item>P</item>
+    </array>
 </resources>

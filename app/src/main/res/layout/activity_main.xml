@@ -38,13 +38,12 @@
 
             <Button
                 android:id="@+id/settingsBtn"
-                style='@style/Widget.App.Button.TextButton'
+                style="@style/Widget.App.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/icon_settings"
-                android:insetLeft="40dp"
                 android:scaleX="1.2"
                 android:scaleY="1.2"
                 app:icon="@drawable/ic_settings"

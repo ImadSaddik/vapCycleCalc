@@ -1,9 +1,616 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_bg"
     tools:context=".DataInput">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayTop"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/top_app_bar_bg"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/backBtn"
+                    style="@style/Widget.App.Button.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_settings"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    app:icon="@drawable/ic_back_arrow"
+                    tools:ignore="RelativeOverlap" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_toEndOf="@id/backBtn"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:text="@string/properties_result"
+                    android:textColor="?attr/colorOnSecondary"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="@string/boiler"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayTop" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/boilerTempLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/boilerTempEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:hint="@string/temperature_hint"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/boilerPressLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/boilerPressEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:hint="@string/pressure_hint"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="@string/condenser"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/condenserTempPressLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="3">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/condenserTempPressEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:hint="@string/temperature_pressure_hint" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/condenserTempPressDropDownMenuLay"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="3"
+                    android:hint="@string/condenser_drop_down_menu">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/condenserTempPressDropDownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:inputType="none"
+                        app:simpleItems="@array/condenser_array" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="@string/turbine"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/turbineEffLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/turbineEffEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:hint="@string/turbine_pump_efficiency" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/turbineOutLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/turbineOutEditTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:hint="@string/turbine_output" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="@string/pump"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pumpEffLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pumpEffEditTxt"
+                    android:layout_width="match_parent"
+                    android:inputType="numberDecimal"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:hint="@string/turbine_pump_efficiency" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/calculateBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="@string/calculate"
+                android:textAllCaps="true"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pumpEffLay" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calculateBtn">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/enthalpyOneTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentStart="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/enthalpyOneValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/enthalpyOneTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/enthalpyTwoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/enthalpyTwoValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/enthalpyTwoTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/enthalpyThreeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/enthalpyThreeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/enthalpyThreeTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/enthalpyFourTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/enthalpyFourValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/enthalpyFourTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/turbineOutputTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/turbineOutputValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/turbineOutputTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/pumpPowerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pumpPowerValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/pumpPowerTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/boilerQTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/boilerQValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/boilerQTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/condenserQTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/condenserQValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/condenserQTitle"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/globalEffTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/globalEffVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/globalEffTitle"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/top_app_bar_bg"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/massTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="false"
+                        android:fontFamily="@font/roboto_condensed_light"
+                        android:text="@string/enthalpy_example"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/massValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/massTitle"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:text="@string/enthalpy_unit_example"
+                        android:textColor="?attr/colorOnSecondary" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

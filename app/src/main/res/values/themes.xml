@@ -19,11 +19,14 @@
         <item name="borderlessButtonStyle">@style/Widget.App.Button.TextButton</item>
     </style>
 
-    <style name="Widget.App.Button.IconButton" parent="Widget.Material3.Button.IconButton">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.IconButton</item>
+
+
+    <style name="Widget.App.Button.IconButton" parent="Widget.Material3.Button.IconButton.Outlined">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.IconButton.Outlined</item>
     </style>
 
-    <style name="ThemeOverlay.App.Button.IconButton" parent="">
+    <style name="ThemeOverlay.App.Button.IconButton.Outlined" parent="">
+        <item name="colorOutline">@android:color/transparent</item>
         <item name="colorContainer">@android:color/transparent</item>
         <item name="colorOnContainer">?attr/colorOnSecondary</item>
     </style>
@@ -34,6 +37,8 @@
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.App.Button</item>
     </style>
+
+
 
     <style name="ThemeOverlay.App.Button.TextButton" parent="">
         <item name="colorContainer">@android:color/transparent</item>

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ComponentDialog.componentDialogListener {
 
     private Button settingsBtn, duplicateBtn, removeBtn, confirmBtn;
-    private RelativeLayout canvasRelLay;
+    public static RelativeLayout canvasRelLay;
     private ImageView boilerImg, condenserImg, pumpImg, turbineImg;
     private float dX, dY;
     private GestureDetector gd;

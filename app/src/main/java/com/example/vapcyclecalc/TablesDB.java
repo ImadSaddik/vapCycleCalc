@@ -9,8 +9,8 @@ public class TablesDB {
     private static final String SAT_PRESSURE_KEY = "SAT_PRESS_LIST";
     public static final String SUPERHEATED_KEY = "SUPER_HEATED_LIST";
 
-    public static List<SatWaterTemperature> satWaterTemperatureList = new ArrayList<>();
-    public static List<SatWaterPressure> satWaterPressureList = new ArrayList<>();
+    public static List<SatWater> satWaterTemperatureList = new ArrayList<>();
+    public static List<SatWater> satWaterPressureList = new ArrayList<>();
     public static List<SuperheatedWaterVapor> superheatedWaterVaporList = new ArrayList<>();
 
     public static void setSatWaterTemperatureList() {
@@ -67,10 +67,10 @@ public class TablesDB {
                 // Creating an object from the list
                 switch (key) {
                     case SAT_TEMPERATURE_KEY:
-                        satWaterTemperatureList.add((SatWaterTemperature) makeObjectFromList(valuesToFloat, key));
+                        satWaterTemperatureList.add((SatWater) makeObjectFromList(valuesToFloat, key));
                         break;
                     case SAT_PRESSURE_KEY:
-                        satWaterPressureList.add((SatWaterPressure) makeObjectFromList(valuesToFloat, key));
+                        satWaterPressureList.add((SatWater) makeObjectFromList(valuesToFloat, key));
                         break;
                 }
                 // Resetting the sb in order to grab another line
@@ -83,13 +83,13 @@ public class TablesDB {
     private static Object makeObjectFromList(List<Float> valuesToFloat, String key) {
         switch (key) {
             case SAT_TEMPERATURE_KEY:
-                return new SatWaterTemperature(valuesToFloat.get(0),
+                return new SatWater(valuesToFloat.get(0),
                         valuesToFloat.get(1), valuesToFloat.get(2), valuesToFloat.get(3),
                         valuesToFloat.get(4), valuesToFloat.get(5), valuesToFloat.get(6),
                         valuesToFloat.get(7), valuesToFloat.get(8));
             case SAT_PRESSURE_KEY:
-                return new SatWaterPressure(valuesToFloat.get(0),
-                        valuesToFloat.get(1), valuesToFloat.get(2), valuesToFloat.get(3),
+                return new SatWater(valuesToFloat.get(1),
+                        valuesToFloat.get(0), valuesToFloat.get(2), valuesToFloat.get(3),
                         valuesToFloat.get(4), valuesToFloat.get(5), valuesToFloat.get(6),
                         valuesToFloat.get(7), valuesToFloat.get(8));
             case SUPERHEATED_KEY:
