@@ -19,8 +19,6 @@
         <item name="borderlessButtonStyle">@style/Widget.App.Button.TextButton</item>
     </style>
 
-
-
     <style name="Widget.App.Button.IconButton" parent="Widget.Material3.Button.IconButton.Outlined">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.IconButton.Outlined</item>
     </style>

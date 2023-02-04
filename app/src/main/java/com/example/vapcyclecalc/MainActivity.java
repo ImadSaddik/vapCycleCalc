@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
         ComponentDialog.componentDialogListener {
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 Intent intent = new Intent(MainActivity.this, DataInput.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, confirmErrorDialog, Toast.LENGTH_SHORT).show();
+                openCycleDialog();
             }
         });
     }
@@ -323,6 +322,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return false;
             }
         });
+    }
+
+    private void openCycleDialog() {
+        CycleAlertDialog dialog = new CycleAlertDialog();
+        dialog.setErrorMsg(confirmErrorDialog);
+        dialog.show(getSupportFragmentManager(), "Cycle alert dialog");
     }
 
     private void openDialog() {

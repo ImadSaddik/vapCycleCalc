@@ -13,8 +13,19 @@
         <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/Widget.App.Button</item>
+        <item name="materialIconButtonStyle">@style/Widget.App.Button.IconButton</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
         <item name="borderlessButtonStyle">@style/Widget.App.Button.TextButton</item>
+    </style>
+
+    <style name="Widget.App.Button.IconButton" parent="Widget.Material3.Button.IconButton.Outlined">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.IconButton.Outlined</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Button.IconButton.Outlined" parent="">
+        <item name="colorOutline">@android:color/transparent</item>
+        <item name="colorContainer">@android:color/transparent</item>
+        <item name="colorOnContainer">?attr/colorOnSecondary</item>
     </style>
 
     <style name="Widget.App.Button.TextButton" parent="Widget.Material3.Button.TextButton">

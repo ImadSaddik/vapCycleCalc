@@ -37,6 +37,7 @@
     <string name="enthalpy_example">h1</string>
     <string name="enthalpy_unit_example">2758 kJ/kg</string>
     <string name="sampleText">Sample text</string>
+    <string name="error">Error</string>
 
     <array name="condenser_array">
         <item>T</item>
