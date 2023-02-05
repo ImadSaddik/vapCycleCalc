@@ -1,4 +1,7 @@
-![](/home/imad/Projects/Android Studio/AndroidStudioProjects/Apps_created/vapCycleCalc/img/logo_with_text.png)
+<p align="center">
+  <img src="https://github.com/ImadSaddik/vapCycleCalc/blob/master/img/logo_with_text.svg" alt="vapCycleCalc logo">
+</p>
+
 
 <br></br>
 vapCycleCalc is an app that facilitate the analysis of rankine cycle, it
