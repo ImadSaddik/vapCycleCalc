@@ -13,6 +13,10 @@ public class SuperheatedWaterVapor {
     // in kJ / (kg * k)
     private float entropy;
 
+    public SuperheatedWaterVapor() {
+
+    }
+
     public SuperheatedWaterVapor(float temperature, float satTemperature, float specificVolume,
                                  float enthalpy, float entropy, float pressure) {
         this.temperature = temperature;
@@ -45,5 +49,29 @@ public class SuperheatedWaterVapor {
 
     public float getEntropy() {
         return entropy;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+    }
+
+    public void setSatTemperature(float satTemperature) {
+        this.satTemperature = satTemperature;
+    }
+
+    public void setPressure(float pressure) {
+        this.pressure = pressure;
+    }
+
+    public void setSpecificVolume(float specificVolume) {
+        this.specificVolume = specificVolume;
+    }
+
+    public void setEnthalpy(float enthalpy) {
+        this.enthalpy = enthalpy;
+    }
+
+    public void setEntropy(float entropy) {
+        this.entropy = entropy;
     }
 }

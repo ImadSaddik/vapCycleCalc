@@ -135,8 +135,8 @@ public class DataInput extends AppCompatActivity {
 
             // If we didn't find the value in the table so we need to do linear interpolation
             if (!valueExist) {
-                SatWater interpolationObj = pressureInterpolation();
-                setEntropyEnthalpy(interpolationObj);
+                SatWater interpolatedObj = pressureInterpolation();
+                setEntropyEnthalpy(interpolatedObj);
             }
         }
 
@@ -161,7 +161,8 @@ public class DataInput extends AppCompatActivity {
     }
 
     private SatWater temperatureInterpolation() {
-        SatWater lowerBound = null, upperBound = null, newObj = new SatWater();
+        SatWater lowerBound = null, upperBound = null;
+        SatWater newObj = new SatWater();
         String s = condenserTempPressEditTxt.getText().toString();
 
         for (int i = 0; i < TablesDB.satWaterPressureList.size(); i++) {
@@ -225,16 +226,68 @@ public class DataInput extends AppCompatActivity {
     }
 
     private void setEnthalpyOneValue() {
+        boolean doesExist = false;
+        SuperheatedWaterVapor superheatedWaterVapor = new SuperheatedWaterVapor();
+
         for (SuperheatedWaterVapor obj : TablesDB.superheatedWaterVaporList) {
             float temp = Float.parseFloat(boilerTempEditTxt.getText().toString());
             float press = Float.parseFloat(boilerPressEditTxt.getText().toString());
-
             if (obj.getTemperature() == temp && obj.getPressure() == press) {
-                String s = String.valueOf(Math.round(obj.getEnthalpy() * 100.0) / 100.0);
-                enthalpyValue1.setText(s);
-                entropy1 = obj.getEntropy();
+                superheatedWaterVapor = obj;
+                doesExist = true;
+                break;
             }
         }
+        if (!doesExist) {
+            superheatedWaterVapor = superheatedInterpolation();
+        }
+
+        String s = String.valueOf(Math.round(superheatedWaterVapor.getEnthalpy() * 100.0) / 100.0);
+        enthalpyValue1.setText(s);
+        entropy1 = superheatedWaterVapor.getEntropy();
+    }
+
+    private SuperheatedWaterVapor superheatedInterpolation() {
+        SuperheatedWaterVapor lowerBound = null, upperBound = null;
+        SuperheatedWaterVapor newObj = new SuperheatedWaterVapor();
+
+        String sTemp = boilerTempEditTxt.getText().toString();
+        String sPress = boilerPressEditTxt.getText().toString();
+
+        for (int i = 0; i < TablesDB.superheatedWaterVaporList.size(); i++) {
+            if (Float.parseFloat(sTemp) < TablesDB.superheatedWaterVaporList.get(i).getTemperature()
+                    && Float.parseFloat(sPress) == TablesDB.superheatedWaterVaporList.get(i).getPressure()) {
+                lowerBound = TablesDB.superheatedWaterVaporList.get(i - 1);
+                upperBound = TablesDB.superheatedWaterVaporList.get(i);
+                break;
+            }
+        }
+        if (lowerBound != null && upperBound != null) {
+            populateObj(newObj, lowerBound, upperBound);
+        }
+        return newObj;
+    }
+
+    private void populateObj(SuperheatedWaterVapor newObj, SuperheatedWaterVapor lowerBound,
+                             SuperheatedWaterVapor upperBound) {
+        String sTemp = boilerTempEditTxt.getText().toString();
+        String sPress = boilerPressEditTxt.getText().toString();
+
+        newObj.setTemperature(Float.parseFloat(sTemp));
+        newObj.setSpecificVolume((newObj.getTemperature() - lowerBound.getTemperature()) *
+                (upperBound.getSpecificVolume() - lowerBound.getSpecificVolume()) /
+                (upperBound.getTemperature() - lowerBound.getTemperature()) +
+                lowerBound.getSpecificVolume());
+        newObj.setEnthalpy((newObj.getTemperature() - lowerBound.getTemperature()) *
+                (upperBound.getEnthalpy() - lowerBound.getEnthalpy()) /
+                (upperBound.getTemperature() - lowerBound.getTemperature()) +
+                lowerBound.getEnthalpy());
+        newObj.setEntropy((newObj.getTemperature() - lowerBound.getTemperature()) *
+                (upperBound.getEntropy() - lowerBound.getEntropy()) /
+                (upperBound.getTemperature() - lowerBound.getTemperature()) +
+                lowerBound.getEntropy());
+        newObj.setPressure(Float.parseFloat(sPress));
+        newObj.setSatTemperature(upperBound.getSatTemperature());
     }
 
     private void calculateTheEfficiency() {
