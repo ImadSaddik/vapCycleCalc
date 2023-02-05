@@ -4,8 +4,13 @@
 
 
 <br></br>
-vapCycleCalc is an app that facilitate the analysis of rankine cycle, it
-allows you to draw the cycle by placing components. Each component has properties
-and after finishing the cycle you can confirm it and then go to the page
-where you can do the calculation, there you can get the value of enthalpy, power
-, efficiency and more.
+vapCycleCalc is a simple app that was created to help students analyze 
+Rankine cycles. The idea behind the app is to provide a simple and 
+accessible tool that makes the analysis process easier and more 
+intuitive. vapCycleCalc has two key features, the first feature 
+allows you to draw a Rankine cycle on your mobile device 
+(right now it is limited to just simple Rankine cycle), 
+providing a clear visual representation of the cycle. 
+The second feature includes is a calculator that help you analyze 
+the cycle, gain time and look for the values that results in a 
+good efficiency.
